@@ -62,8 +62,8 @@ lake env lean Prime2even.lean
 
 ```text
 .
-├── Prime2even.lean        # main theorem and proof
-├── Prime2even/            # supporting modules (if any)
+├── Prime2even.lean        # entry
+├── Prime2even/Basic.lean  # main theorem and proof
 ├── lakefile.toml          # Lake build configuration
 ├── lean-toolchain         # pinned Lean toolchain
 ├── lake-manifest.json     # pinned dependency revisions
@@ -77,5 +77,5 @@ lake env lean Prime2even.lean
 - To confirm no `sorry` or unexpected axioms are used, run:
 
 ```lean
-#print axioms sum_of_primes_gt_two_even
+#print axioms any_two_primes_gt_two_sum_even
 ```
