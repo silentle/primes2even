@@ -70,5 +70,3 @@ theorem primes_sum_even (p q : Nat)
       add_succ' (a + b + 1) (a + b), succ_add' (a + b) (a + b), sum a b]
 
 end Prime2even.Minimal
-
-#print axioms Prime2even.Minimal.primes_sum_even
