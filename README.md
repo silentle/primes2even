@@ -17,7 +17,7 @@ theorem any_two_primes_gt_two_sum_even :
 
 The argument is short and entirely constructive:
 
-由于任意大于2的素数都是奇数，任意两个奇数的和是偶数，所以两个大于2的素数的和是偶数。
+Since any prime greater than 2 is odd, and the sum of any two odd numbers is even, the sum of two primes greater than 2 is even.
 
 1. A prime is either `2` or odd (`Nat.Prime.eq_two_or_odd`).
 2. Since `p > 2`, `p` cannot be `2`, hence `p % 2 = 1`. Likewise `q % 2 = 1`.
@@ -36,14 +36,8 @@ exact hp_odd.add_odd hq_odd
 
 ## Zero-axiom variant
 
-`Prime2even/Minimal.lean` proves the same statement from first principles,
-with only `Nat` recursion, `decide`, and a little induction — no Mathlib
-lemmas, and no `omega` or `simp` (both of which pull in the three standard
-Lean axioms).  The root module's `#print axioms` reports:
-
-```text
-'Prime2even.Minimal.primes_sum_even' does not depend on any axioms
-```
+`Prime2even/Minimal.lean` proves the same statement
+with only `Nat` recursion, `decide`, and a little induction.
 
 ## Requirements
 
