@@ -5,6 +5,7 @@ Authors: silentle
 -/
 module
 public import Mathlib
+set_option linter.style.header false
 
 /-!
 # Prime2even
