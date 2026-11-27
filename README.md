@@ -32,19 +32,17 @@ have hq_odd : Odd q := Nat.odd_iff.mpr hq_mod
 exact hp_odd.add_odd hq_odd
 ```
 
-
 ## Zero-axiom variant
 
 `Prime2even/Minimal.lean` proves the same statement from first principles,
-without Mathlib and without the tactics (`omega`, `simp`) that pull in the
-standard Lean axioms.  The root module's `#print axioms` reports:
+with only `Nat` recursion, `decide`, and a little induction — no Mathlib
+lemmas, and no `omega` or `simp` (both of which pull in the three standard
+Lean axioms).  The root module's `#print axioms` reports:
 
 ```text
 'Prime2even.Minimal.primes_sum_even' does not depend on any axioms
 ```
 
-No `propext`, `Classical.choice` or `Quot.sound` — just `Nat` recursion
-and a little induction.
 ## Requirements
 
 - [Lean 4](https://lean-lang.org/) via [elan](https://github.com/leanprover/elan)
@@ -61,18 +59,14 @@ lake exe cache get   # download precompiled Mathlib oleans
 lake build
 ```
 
-To check a single file without building everything:
-
-```bash
-lake env lean Prime2even/Basic.lean
-```
-
 ## Project layout
 
 ```text
 .
-├── Prime2even.lean        # entry, also prints axioms of the theorem
-├── Prime2even/Basic.lean  # main theorem and proof
+├── Prime2even.lean        # entry, prints axioms of both proofs
+├── Prime2even/Basic.lean  # main theorem and proof (Mathlib version)
+├── Prime2even/Minimal.lean  # zero-axiom self-contained proof
+├── LICENSE                 # MIT license
 ├── lakefile.toml          # Lake build configuration
 ├── lean-toolchain         # pinned Lean toolchain
 ├── lake-manifest.json     # pinned dependency revisions
