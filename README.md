@@ -32,6 +32,22 @@ have hq_odd : Odd q := Nat.odd_iff.mpr hq_mod
 exact hp_odd.add_odd hq_odd
 ```
 
+
+## Zero-axiom variant
+
+`Prime2even/Minimal.lean` contains a second, fully self-contained proof of
+the same statement that uses no Mathlib lemmas (and no `omega`/`simp`, both
+of which pull in the three standard Lean axioms).  Its `#print axioms`
+reports:
+
+```text
+'Prime2even.Minimal.primes_sum_even' does not depend on any axioms
+```
+
+i.e. the theorem is proved without `propext`, `Classical.choice` or
+`Quot.sound` — the mathematical content of the statement genuinely needs
+no axioms, only `Nat` recursion and a little induction.
+
 ## Requirements
 
 - [Lean 4](https://lean-lang.org/) via [elan](https://github.com/leanprover/elan)
