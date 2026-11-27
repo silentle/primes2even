@@ -4,16 +4,7 @@ A small Lean 4 / Mathlib formalization proving that the sum of any two primes gr
 
 ## Theorem
 
-For natural numbers `p q`, if both are prime and both are greater than `2`, then `p + q` is even:
-
-```lean
-theorem sum_of_primes_gt_two_even {p q : ℕ}
-    (hp : Nat.Prime p) (hq : Nat.Prime q)
-    (hp2 : 2 < p) (hq2 : 2 < q) :
-    Even (p + q)
-```
-
-Equivalently, in fully quantified form:
+For all natural numbers `p q`, if both are prime and both are greater than `2`, then `p + q` is even:
 
 ```lean
 theorem any_two_primes_gt_two_sum_even :
@@ -25,14 +16,17 @@ theorem any_two_primes_gt_two_sum_even :
 The argument is short and entirely constructive:
 
 1. A prime is either `2` or odd (`Nat.Prime.eq_two_or_odd`).
-2. Since `p > 2`, `p` cannot be `2`, hence `p` is odd. Likewise `q` is odd.
-3. The sum of two odd numbers is even (`Odd.add_odd`).
+2. Since `p > 2`, `p` cannot be `2`, hence `p % 2 = 1`. Likewise `q % 2 = 1`.
+3. These residues give `Odd p` and `Odd q` via `Nat.odd_iff`.
+4. The sum of two odd numbers is even (`Odd.add_odd`).
 
 ```lean
-have hp_odd : Odd p :=
+have hp_mod : p % 2 = 1 :=
   (Nat.Prime.eq_two_or_odd hp).resolve_left (by omega)
-have hq_odd : Odd q :=
+have hq_mod : q % 2 = 1 :=
   (Nat.Prime.eq_two_or_odd hq).resolve_left (by omega)
+have hp_odd : Odd p := Nat.odd_iff.mpr hp_mod
+have hq_odd : Odd q := Nat.odd_iff.mpr hq_mod
 exact hp_odd.add_odd hq_odd
 ```
 
@@ -55,14 +49,14 @@ lake build
 To check a single file without building everything:
 
 ```bash
-lake env lean Prime2even.lean
+lake env lean Prime2even/Basic.lean
 ```
 
 ## Project layout
 
 ```text
 .
-├── Prime2even.lean        # entry
+├── Prime2even.lean        # entry, also prints axioms of the theorem
 ├── Prime2even/Basic.lean  # main theorem and proof
 ├── lakefile.toml          # Lake build configuration
 ├── lean-toolchain         # pinned Lean toolchain
@@ -74,8 +68,4 @@ lake env lean Prime2even.lean
 
 - In VS Code with the Lean 4 extension, a successful proof shows a **blue double checkmark** in the gutter.
 - `lake build` performs a full kernel type-check of the project.
-- To confirm no `sorry` or unexpected axioms are used, run:
-
-```lean
-#print axioms any_two_primes_gt_two_sum_even
-```
+- The root module `Prime2even.lean` runs `#print axioms any_two_primes_gt_two_sum_even`, so building the project reports the axioms used and confirms no `sorry` sneaked in.
