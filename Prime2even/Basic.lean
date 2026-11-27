@@ -1,7 +1,17 @@
+/-
+Copyright (c) 2025 silentle. All rights reserved.
+-/
 module
 import Mathlib
 
-theorem any_two_primes_gt_two_sum_even :
+/-!
+# Prime2even
+
+A small formalization proving that the sum of any two primes greater
+than `2` is even.
+-/
+
+public theorem any_two_primes_gt_two_sum_even :
     ∀ p q : ℕ, Nat.Prime p → Nat.Prime q → 2 < p → 2 < q → Even (p + q) := by
   intro p q hp hq hp2 hq2
   have hp_mod : p % 2 = 1 :=
