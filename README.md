@@ -1,5 +1,7 @@
 # Prime2Even
 
+[![CI](https://github.com/silentle/primes2even/actions/workflows/lean_action_ci.yml/badge.svg)](https://github.com/silentle/primes2even/actions/workflows/lean_action_ci.yml)
+
 A small Lean 4 / Mathlib formalization proving that the sum of any two primes greater than `2` is even.
 
 ## Theorem
