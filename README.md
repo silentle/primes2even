@@ -17,6 +17,8 @@ theorem any_two_primes_gt_two_sum_even :
 
 The argument is short and entirely constructive:
 
+由于任意大于2的素数都是奇数，任意两个奇数的和是偶数，所以两个大于2的素数的和是偶数。
+
 1. A prime is either `2` or odd (`Nat.Prime.eq_two_or_odd`).
 2. Since `p > 2`, `p` cannot be `2`, hence `p % 2 = 1`. Likewise `q % 2 = 1`.
 3. These residues give `Odd p` and `Odd q` via `Nat.odd_iff`.
@@ -63,13 +65,13 @@ lake build
 
 ```text
 .
-├── Prime2even.lean        # entry, prints axioms of both proofs
-├── Prime2even/Basic.lean  # main theorem and proof (Mathlib version)
+├── Prime2even.lean          # entry, prints axioms of both proofs
+├── Prime2even/Basic.lean    # main theorem and proof (Mathlib version)
 ├── Prime2even/Minimal.lean  # zero-axiom self-contained proof
-├── LICENSE                 # MIT license
-├── lakefile.toml          # Lake build configuration
-├── lean-toolchain         # pinned Lean toolchain
-├── lake-manifest.json     # pinned dependency revisions
+├── LICENSE                  # MIT license
+├── lakefile.toml            # Lake build configuration
+├── lean-toolchain           # pinned Lean toolchain
+├── lake-manifest.json       # pinned dependency revisions
 └── README.md
 ```
 
